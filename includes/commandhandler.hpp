@@ -1,8 +1,10 @@
 #ifndef _chandler_h
 #define _chandler_h
 
-#include "command.hpp"
-#include "bot.hpp"
+#include <vector>
+
+class Bot;
+class Command;
 
 class CommandHandler {
     public:
