@@ -22,7 +22,7 @@ Parser::~Parser() {}
  */
 void Parser::parse_server_message(std::string server_message) {
     std::size_t find_ping = server_message.find("PING");
-    if(find_ping != std::string::npos) {
+    if(find_ping != std::string::npos && find_ping == 1) {
         bot->send_server_message("PONG :tmi.twitch.tv");
         return;
     }
