@@ -1,3 +1,5 @@
 *.txt
 *.o
+*.d
+build
 .vscode

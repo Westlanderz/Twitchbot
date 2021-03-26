@@ -5,11 +5,11 @@ LurkCommand::LurkCommand(Bot *_bot) : Command(), bot{_bot} {
     result = "A lurk a day will keep twitch at bay.";
 }
 
-void LurkCommand::execute(std::string sender, std::string original_msg, bool mod, bool sub, std::string channel) {
+void LurkCommand::execute(std::string, std::string, bool, bool, std::string channel) {
     bot->send_chat_message(result, channel);
 }
 
-bool LurkCommand::has_perms_to_run(bool mod, bool sub, std::string sender) {
+bool LurkCommand::has_perms_to_run(bool, bool, std::string) {
     return true;
 }
 
@@ -26,7 +26,7 @@ std::string LurkCommand::list_command() {
 }
 
 std::string LurkCommand::generate_help_message(const std::string &channel) {
-    return "Use  " + bot->is_prefix(channel) + names[0] + " let the streamer know that you are lurking.";
+    return "Use " + bot->is_prefix(channel) + names[0] + " let the streamer know that you are lurking.";
 }
 
 void LurkCommand::new_output(std::string _result) {

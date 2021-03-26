@@ -5,8 +5,14 @@
 #include <string.h>
 #include <chrono>
 
+/**
+ * @brief Construct a new Timer Handler:: Timer Handler object
+ * 
+ * @param _channel the channel for the timerhandler
+ * @param _bot the bot instance so it can send messages from here
+ */
 TimerHandler::TimerHandler(std::string _channel, Bot *_bot) 
-    : timer_file{"files/timers/" + _channel + "_timers.txt"}, channel{_channel}, amount_timers{1}, bot{_bot} {
+    : timer_file{"../files/timers/" + _channel + "_timers.txt"}, channel{_channel}, amount_timers{1}, bot{_bot} {
         std::fstream file;
         file.open(timer_file, std::ios::trunc | std::ios::out);
         if(!file){
@@ -26,8 +32,16 @@ TimerHandler::TimerHandler(std::string _channel, Bot *_bot)
         file.close();
     }
 
+/**
+ * @brief Destroy the Timer Handler:: Timer Handler object
+ * 
+ */
 TimerHandler::~TimerHandler() {}
 
+/**
+ * @brief goes through the tiemrs in the timer file and checks if it needs to be executed
+ * 
+ */
 void TimerHandler::calc_timer() {
     std::fstream timers;
     std::string tmp_result{""};
@@ -74,7 +88,7 @@ void TimerHandler::calc_timer() {
                                 int hours = std::stoi(timer_last_send.substr(timer_last_send.find(":") - 2, 2));
                                 if((hour * 60 + min) > (hours * 60 + mins + interval) || (hour == 0 && min < 5)) {
                                     bot->send_chat_message(message, channel);
-                                    auto now = std::chrono::system_clock::now();
+                                    now = std::chrono::system_clock::now();
                                     time_t times = std::chrono::system_clock::to_time_t(now);
                                     tm *local_times = localtime(&times);
                                     std::string new_hours = std::to_string(local_times->tm_hour);
@@ -120,6 +134,11 @@ void TimerHandler::remove_timer() {
     amount_timers--;
 }
 
+/**
+ * @brief Gives back the file that excists on this handler
+ * 
+ * @return std::string the file for the timerhandler
+ */
 std::string TimerHandler::is_timer_file() {
     return timer_file;
 }

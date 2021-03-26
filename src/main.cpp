@@ -3,13 +3,14 @@
 #include <string>
 #include <sockpp/tcp_connector.h>
 #include <fstream>
+#include <filesystem>
 #include <vector>
-#include "includes/bot.hpp"
+#include "../includes/bot.hpp"
 
 /**
  * @brief Main program cycle where the socket and bot are created
  * 
- * @return int 
+ * @return int
  */
 
 int main(void) {
@@ -22,9 +23,14 @@ int main(void) {
     std::fstream config_file, channel_file;
     std::string oauthcode;
     std::vector<std::string> channels;
-    config_file.open("files/config/config.txt", std::ios::in);
+
+    std::filesystem::create_directory("../files");
+    std::filesystem::create_directory("../files/config");
+    std::filesystem::create_directory("../files/timers");
+    config_file.open("../files/config/config.txt", std::ios::in);
 	if (!config_file) {
-		std::cerr << "No config.txt file" << std::endl;
+		std::cerr << "Can not find or open ../files/config/config.txt" << std::endl;
+        exit(1);
 	} else {
 		char ch;
 		while (1) {
@@ -36,9 +42,10 @@ int main(void) {
 	}
 	config_file.close();
 
-    channel_file.open("files/config/channels.txt", std::ios::in);
+    channel_file.open("../files/config/channels.txt", std::ios::in);
     if(!channel_file) {
-        std::cerr << "No channels.txt file" << std::endl;
+        std::cerr << "Can not find or open ../files/config/channels.txt" << std::endl;
+        exit(1);
     } else {
         std::string line;
         while(std::getline(channel_file, line)) {
