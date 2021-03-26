@@ -1,5 +1,6 @@
 executable('twitchbot',
-        ['bot.cpp',
+        [
+        'bot.cpp',
         'commandhandler.cpp',
         'main.cpp',
         'parser.cpp',
