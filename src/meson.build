@@ -12,5 +12,6 @@ executable('twitchbot',
         'commands/lurkcommand.cpp',
         'commands/pingcommand.cpp',
         'commands/removetimer.cpp',
+        'commands/listtimerscommand.cpp',
         ]
     )
