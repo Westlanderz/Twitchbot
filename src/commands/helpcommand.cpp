@@ -20,19 +20,28 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
         } else {
             command_name = original_msg.substr(find_args + 1);
         }
+        bool found{false};
         for(auto &command : allowed_commands) {;
             if(!strcmp(command->list_command().c_str(), command_name.c_str())) {
                 bot->send_chat_message(command->generate_help_message(channel), channel);
+                found = true;
                 break;
             }
+        }
+        if(!found) {
+            bot->send_chat_message("Could not find the command you were looking for.", channel);
         }
     } else {
         std::string help_msg = "here is a list of commands you can run: ";
         for(auto &command : allowed_commands) {
             help_msg.append(command->list_command());
-            help_msg.append(", ");
+            if(!strcmp(allowed_commands.at(allowed_commands.size() - 1)->list_command().c_str(), command->list_command().c_str())) {
+                help_msg.append(". ");
+            } else {
+                help_msg.append(", ");
+            }
         }
-        help_msg.append(". Try " + bot->is_prefix(channel) +  "help " + names[0] + " to learn more about one of them. Version: 1.0.1-beta https://github.com/Westlanderz/TwitchBot");
+        help_msg.append("Try " + bot->is_prefix(channel) +  "help " + names[0] + " to learn more about one of them. Version: 1.0.1-beta https://github.com/Westlanderz/TwitchBot");
         bot->send_chat_message(help_msg, channel);
     }
 }
