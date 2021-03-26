@@ -8,6 +8,7 @@
 #include "../includes/commands/addtimer.hpp"
 #include "../includes/commands/edittimer.hpp"
 #include "../includes/commands/removetimer.hpp"
+#include "../includes/commands/listtimerscommand.hpp"
 
 /**
  * @brief Construct a new Command Handler:: Command Handler object
@@ -38,6 +39,7 @@ void CommandHandler::init_command_list() {
     available_commands.push_back(new AddTimerCommand(bot));
     available_commands.push_back(new EditTimerCommand(bot));
     available_commands.push_back(new RemoveTimerCommand(bot));
+    available_commands.push_back(new ListtimerCommand(bot));
     available_commands.push_back(new EditresultCommand(available_commands, bot));
     available_commands.push_back(new HelpCommand(available_commands, bot));
 }
