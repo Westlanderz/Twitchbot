@@ -16,7 +16,7 @@ Bot::Bot(std::string _username, std::vector<std::string> _channels, std::string 
     : username{_username}, channels{_channels}, conn{_conn}, owner{_username} {
         for(auto &__channels : _channels) {
             prefixes.insert(std::pair<std::string, std::string>(__channels, prefix));
-            commandhandlers.insert(std::pair<std::string, CommandHandler *>(__channels, new CommandHandler(this)));
+            commandhandlers.insert(std::pair<std::string, CommandHandler *>(__channels, new CommandHandler(this, __channels)));
             timerhandlers.insert(std::pair<std::string, TimerHandler *>(__channels, new TimerHandler(__channels, this)));
         }
         parser = new Parser(this);
