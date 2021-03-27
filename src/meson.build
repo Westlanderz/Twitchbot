@@ -1,10 +1,11 @@
 executable('twitchbot',
         [
-        'bot.cpp',
-        'commandhandler.cpp',
         'main.cpp',
+        'bot.cpp',
         'parser.cpp',
+        'commandhandler.cpp',
         'timerhandler.cpp',
+        'paramparser.cpp',
         'commands/addtimer.cpp',
         'commands/changeprefix.cpp',
         'commands/editresult.cpp',
