@@ -21,10 +21,8 @@ std::string ParamParser::parse_command(std::string result, std::string sender) {
         find_param_end = token.find("}");
         if(find_param_result != std::string::npos && find_param_end != std::string::npos) {
             std::string param_to_find = token.substr(find_param_result + 2, find_param_end - find_param_result - 2);
-            for(auto &_param : params) {
-                if(!strcmp(param_to_find.c_str(), _param.c_str()))
-                    parameters.push_back(param_to_find);
-            }
+            if(check_good_param(param_to_find))
+                parameters.push_back(param_to_find);
         }
     }
     
