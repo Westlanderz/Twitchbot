@@ -1,11 +1,11 @@
-#ifndef _change_prefix_h
-#define _change_prefix_h
+#ifndef _listtimers_h
+#define _listtimers_h
 
 #include "../command.hpp"
 
-class ChangePrefixCommand : public Command {
+class ListtimerCommand : public Command {
     public:
-        ChangePrefixCommand(Bot *);
+        ListtimerCommand(Bot *);
 
         void execute(std::string, std::string, bool, bool, std::string) override;
         bool has_perms_to_run(bool, bool, std::string) override;
@@ -17,7 +17,6 @@ class ChangePrefixCommand : public Command {
     private:
         std::vector<std::string> names;
         Bot *bot;
-        std::string result;
 };
 
-#endif //_change_prefix_h
+#endif //_listtimers_h

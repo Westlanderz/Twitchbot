@@ -1,11 +1,11 @@
-#ifndef _change_prefix_h
-#define _change_prefix_h
+#ifndef _rmtimer_h
+#define _rmtimer_h
 
 #include "../command.hpp"
 
-class ChangePrefixCommand : public Command {
+class RemoveTimerCommand : public Command {
     public:
-        ChangePrefixCommand(Bot *);
+        RemoveTimerCommand(Bot *);
 
         void execute(std::string, std::string, bool, bool, std::string) override;
         bool has_perms_to_run(bool, bool, std::string) override;
@@ -20,4 +20,4 @@ class ChangePrefixCommand : public Command {
         std::string result;
 };
 
-#endif //_change_prefix_h
+#endif //_rmtimer_h
