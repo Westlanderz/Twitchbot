@@ -1,15 +1,20 @@
 #include "../../includes/commands/helpcommand.hpp"
 
-HelpCommand::HelpCommand(std::vector<Command *> _commands, Bot *_bot) : Command(), commands{_commands}, bot{_bot} {
+HelpCommand::HelpCommand(std::vector<Command *> _commands, std::vector<std::string> __commands, Bot *_bot) : commands{_commands}, added_commands{__commands}, bot{_bot} {
     names.push_back("commands");
     names.push_back("help");
 }
 
 void HelpCommand::execute(std::string sender, std::string original_msg, bool mod, bool sub, std::string channel) {
     std::vector<Command *> allowed_commands;
+    std::vector<std::string> allowed_command;
     for(auto &command : commands) {
         if(command->has_perms_to_run(mod, sub, sender))
             allowed_commands.push_back(command);
+    }
+    for(auto &command : added_commands) {
+        if(!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "all") || (!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "sub") && sub) || (!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "mod") && mod) || bot->is_channel(sender) || bot->is_owner(sender))
+            allowed_command.push_back(command);
     }
     std::size_t find_args = original_msg.find(" ");
     std::size_t find_command = original_msg.find(" ", find_args + 1);
@@ -21,9 +26,23 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
             command_name = original_msg.substr(find_args + 1);
         }
         bool found{false};
-        for(auto &command : allowed_commands) {;
+        for(auto &command : allowed_commands) {
             if(!strcmp(command->list_command().c_str(), command_name.c_str())) {
                 bot->send_chat_message(command->generate_help_message(channel), channel);
+                found = true;
+                break;
+            }
+        }
+        for(auto &command : allowed_command) {
+            std::size_t name_start = command.find("Name:");
+            std::string name = command.substr(name_start + 5, command.find("Rights:", name_start) - name_start - 7);
+            if(!strcmp(name.c_str(), command_name.c_str())) {
+                std::size_t help_start = command.find("Help:");
+                std::string help_msg = "Use " + bot->is_prefix(channel);
+                help_msg.append(name);
+                help_msg.append(" ");
+                help_msg.append(command.substr(help_start + 5, command.find("Result:", help_start) - help_start - 7));
+                bot->send_chat_message(help_msg, channel);
                 found = true;
                 break;
             }
@@ -32,10 +51,20 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
             bot->send_chat_message("Could not find the command you were looking for.", channel);
         }
     } else {
-        std::string help_msg = "here is a list of commands you can run: ";
+        std::string help_msg = "Here is a list of commands you can run: ";
         for(auto &command : allowed_commands) {
             help_msg.append(command->list_command());
-            if(!strcmp(allowed_commands.at(allowed_commands.size() - 1)->list_command().c_str(), command->list_command().c_str())) {
+            if(!strcmp(allowed_commands.at(allowed_commands.size() - 1)->list_command().c_str(), command->list_command().c_str()) && allowed_command.size() == 0) {
+                help_msg.append(". ");
+            } else {
+                help_msg.append(", ");
+            }
+        }
+        for(auto &command : allowed_command) {
+            std::size_t name_starts = command.find("Name:");
+            std::string named = command.substr(name_starts + 5, command.find("Rights:", name_starts) - name_starts - 7);
+            help_msg.append(named);
+            if(!strcmp(allowed_command.at(allowed_command.size() - 1).substr(name_starts + 5, command.find("Rights:", name_starts) - name_starts - 7).c_str(), named.c_str())) {
                 help_msg.append(". ");
             } else {
                 help_msg.append(", ");
