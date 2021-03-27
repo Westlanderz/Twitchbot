@@ -1,6 +1,7 @@
 #include "../includes/timerhandler.hpp"
 #include "../includes/bot.hpp"
 #include <fstream>
+#include <filesystem>
 #include <iostream>
 #include <string.h>
 #include <chrono>
@@ -13,23 +14,25 @@
  */
 TimerHandler::TimerHandler(std::string _channel, Bot *_bot) 
     : timer_file{"../files/timers/" + _channel + "_timers.txt"}, channel{_channel}, amount_timers{1}, bot{_bot} {
-        std::fstream file;
-        file.open(timer_file, std::ios::trunc | std::ios::out);
-        if(!file){
-            std::cerr << "file cant be opened" << std::endl;
-        } else {
-            std::string tmp = "Name:autogen Interval:1 Last send:";
-            auto now = std::chrono::system_clock::now();
-            time_t times = std::chrono::system_clock::to_time_t(now);
-            tm *local_times = localtime(&times);
-            std::string new_hours = std::to_string(local_times->tm_hour);
-            std::string new_mins = std::to_string(local_times->tm_min);
-            std::string new_time = new_hours.append(":").append(new_mins);
-            tmp.append(new_time)
-                .append(" Message:Check out westlanderz at github for more projects, you can DM him with questions on discord SenpaiR6#1717 \n\n");
-            file << tmp;
+        if(!std::filesystem::exists(timer_file)) {
+            std::fstream file;
+            file.open(timer_file, std::ios::trunc | std::ios::out);
+            if(!file){
+                std::cerr << "file cant be opened" << std::endl;
+            } else {
+                std::string tmp = "Name:autogen Interval:1 Last send:";
+                auto now = std::chrono::system_clock::now();
+                time_t times = std::chrono::system_clock::to_time_t(now);
+                tm *local_times = localtime(&times);
+                std::string new_hours = std::to_string(local_times->tm_hour);
+                std::string new_mins = std::to_string(local_times->tm_min);
+                std::string new_time = new_hours.append(":").append(new_mins);
+                tmp.append(new_time)
+                    .append(" Message:Check out westlanderz at github for more projects, you can DM him with questions on discord SenpaiR6#1717 \n\n");
+                file << tmp;
+            }
+            file.close();
         }
-        file.close();
     }
 
 /**
@@ -102,9 +105,17 @@ void TimerHandler::calc_timer() {
                                 } else {
                                     tmp_result.append(_timer + "\n\n");
                                 }
+                            } else {
+                                tmp_result.append(_timer + "\n\n");
                             }
+                        } else {
+                            tmp_result.append(_timer + "\n\n");
                         }
+                    } else {
+                        tmp_result.append(_timer + "\n\n");
                     }
+                } else {
+                    tmp_result.append(_timer + "\n\n");
                 }
                 timers_to_write.push_back(tmp_result);
                 tmp_result.clear();
