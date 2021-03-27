@@ -7,6 +7,11 @@ ParamParser::ParamParser() {
     params.push_back("sender");
     params.push_back("user");
     params.push_back("count");
+    // params.push_back("channel");
+    // params.push_back("title");
+    // params.push_back("game");
+    // params.push_back("subs");
+    // params.push_back("follows");
 }
 
 std::string ParamParser::parse_command(std::string result, std::string sender) { //result -> sdsddsf sdasdsdf ${asasd} asdsad ${sdasasdas}
