@@ -64,7 +64,8 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
             std::size_t name_starts = command.find("Name:");
             std::string named = command.substr(name_starts + 5, command.find("Rights:", name_starts) - name_starts - 7);
             help_msg.append(named);
-            if(!strcmp(allowed_command.at(allowed_command.size() - 1).substr(name_starts + 5, command.find("Rights:", name_starts) - name_starts - 7).c_str(), named.c_str())) {
+            std::size_t named_start = allowed_command.at(allowed_command.size() - 1).find("Name:");
+            if(!strcmp(allowed_command.at(allowed_command.size() - 1).substr(named_start + 5, command.find("Rights:", named_start) - named_start - 7).c_str(), named.c_str())) {
                 help_msg.append(". ");
             } else {
                 help_msg.append(", ");
