@@ -27,6 +27,7 @@ int main(void) {
     std::filesystem::create_directory("../files");
     std::filesystem::create_directory("../files/config");
     std::filesystem::create_directory("../files/timers");
+    std::filesystem::create_directory("../files/commands");
     config_file.open("../files/config/config.txt", std::ios::in);
 	if (!config_file) {
 		std::cerr << "Can not find or open ../files/config/config.txt" << std::endl;
