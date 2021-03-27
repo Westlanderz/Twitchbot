@@ -20,7 +20,7 @@ class ParamParser {
 
 
 /**
- *  ${sender} -> 
- *  ${user} ->
- *  ${count} -> 
+ *  ${sender} -> the sender of the message
+ *  ${user} -> the user of the command
+ *  ${count} -> the amount of times the command was run since it was added to the channel
  */
