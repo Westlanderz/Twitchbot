@@ -30,7 +30,7 @@ CommandHandler::~CommandHandler() {
 }
 
 /**
- * @brief Initialise all of the commands
+ * @brief Initialise all of the commands for a channel
  * 
  */
 void CommandHandler::init_command_list() {
