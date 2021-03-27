@@ -1,4 +1,5 @@
 #include "../includes/commandhandler.hpp"
+#include <fstream>
 #include "../includes/bot.hpp"
 #include "../includes/command.hpp"
 #include "../includes/commands/pingcommand.hpp"
@@ -16,7 +17,7 @@
  * 
  * @param _bot a bot instance to be able to send chat messages
  */
-CommandHandler::CommandHandler(Bot *_bot) : bot{_bot} {
+CommandHandler::CommandHandler(Bot *_bot, std::string channel) : bot{_bot}, file_location{"../files/commands/" + channel + "_commands.txt"} {
     init_command_list();
 }
 
@@ -34,6 +35,28 @@ CommandHandler::~CommandHandler() {
  * 
  */
 void CommandHandler::init_command_list() {
+    //TODO: add timeout and ban commands for mod only
+    //TODO: addcommands to file, edit commands and removecommands (List manually added commands)
+    //Name:sadasdas Rights:{all | sub | mod} Count:123123 Help:asdasdasdasdasdasd Result:sadasdasdasasdasd
+    std::fstream commandfile;
+    commandfile.open(file_location, std::ios::app);
+    commandfile.close();
+    commandfile.open(file_location, std::ios::in);
+    if(!commandfile) {
+        std::cerr << "Can not find the file " << file_location << " you are trying to open." << std::endl;
+    } else {
+        std::string command;
+        std::string line;
+        while(std::getline(commandfile, line)) {
+            if(line.empty()) {
+                added_commands.push_back(command);
+                command.clear();
+            } else {
+                command.append(line);
+            }
+        }
+        commandfile.close();
+    }
     available_commands.push_back(new PingCommand(bot));
     available_commands.push_back(new ChangePrefixCommand(bot));
     available_commands.push_back(new LurkCommand(bot));
@@ -42,7 +65,7 @@ void CommandHandler::init_command_list() {
     available_commands.push_back(new RemoveTimerCommand(bot));
     available_commands.push_back(new ListtimerCommand(bot));
     available_commands.push_back(new EditresultCommand(available_commands, bot));
-    available_commands.push_back(new HelpCommand(available_commands, bot));
+    available_commands.push_back(new HelpCommand(available_commands, added_commands, bot));
 }
 
 /**
