@@ -1,5 +1,5 @@
-#include "../includes/bot.hpp"
 #include "../includes/commandhandler.hpp"
+#include "../includes/bot.hpp"
 #include "../includes/command.hpp"
 #include "../includes/commands/pingcommand.hpp"
 #include "../includes/commands/changeprefix.hpp"
