@@ -37,7 +37,6 @@ CommandHandler::~CommandHandler() {
 void CommandHandler::init_command_list() {
     //TODO: add timeout and ban commands for mod only
     //TODO: addcommands to file, edit commands and removecommands (List manually added commands)
-    //Name:sadasdas Rights:{all | sub | mod} Count:123123 Help:asdasdasdasdasdasd Result:sadasdasdasasdasd
     std::fstream commandfile;
     commandfile.open(file_location, std::ios::app);
     commandfile.close();
@@ -85,6 +84,16 @@ void CommandHandler::search_command(std::string command, bool mod, bool sub, std
                 _command->execute(sender, original_message, mod, sub, channel);
             else
                 bot->send_chat_message(sender + " you dont have the permissions to run this command.", channel);
+            return;
+        }
+    }
+    for(auto &_command : added_commands) {
+        std::size_t names_start = _command.find("Name:");
+        std::size_t rights_start = _command.find("Rights:");
+        std::string command_to_find = _command.substr(names_start + 5, rights_start - names_start - 7);
+        if(!strcmp(command.c_str(), command_to_find.c_str())) {
+            std::string msg = _command.substr(_command.find("Result:") + 7);
+            bot->send_chat_message(msg, channel);
             return;
         }
     }
