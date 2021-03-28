@@ -97,3 +97,20 @@ std::string HelpCommand::generate_help_message(const std::string &) {
 }
 
 void HelpCommand::new_output(std::string) {}
+
+void HelpCommand::add_new_command(std::string command, std::string channel) {
+    added_commands.push_back(command);
+    bot->send_chat_message("Added the command to the list of commands", channel);
+}
+
+void HelpCommand::remove_command(std::string command, std::string channel) {
+    std::vector<std::string>::iterator rm = added_commands.end();
+    for(auto it = added_commands.begin(); it != added_commands.end(); it++) {
+        if(!strcmp(it->data(), command.c_str()))
+            rm = it;
+    }
+    if(rm != added_commands.end())
+        added_commands.erase(rm);
+    else
+        bot->send_chat_message("Cant remove this command", channel);
+}

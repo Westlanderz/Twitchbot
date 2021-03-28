@@ -13,8 +13,8 @@ class HelpCommand : public Command {
         std::string list_command() override;
         std::string generate_help_message(const std::string &) override;
         void new_output(std::string) override;
-        void add_new_command(std::string);
-        void remove_command(std::string);
+        void add_new_command(std::string, std::string);
+        void remove_command(std::string, std::string);
 
     private:
         std::vector<std::string> names;
