@@ -1,6 +1,6 @@
 #include "../../includes/commands/changeprefix.hpp"
 
-ChangePrefixCommand::ChangePrefixCommand(Bot *_bot) : Command(), bot{_bot} {
+ChangePrefixCommand::ChangePrefixCommand(Bot *_bot) : bot{_bot} {
     names.push_back("changeprefix");
     names.push_back("change-prefix");
     names.push_back("change_prefix");

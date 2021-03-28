@@ -1,6 +1,6 @@
 #include "../../includes/commands/pingcommand.hpp"
 
-PingCommand::PingCommand(Bot *_bot) : Command(), bot{_bot} {
+PingCommand::PingCommand(Bot *_bot) : bot{_bot} {
     names.push_back("ping");
     names.push_back("pong");
     result = "This is the ping command ${sender}";

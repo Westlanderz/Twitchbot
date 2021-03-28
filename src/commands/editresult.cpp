@@ -1,6 +1,6 @@
 #include "../../includes/commands/editresult.hpp"
 
-EditresultCommand::EditresultCommand(std::vector<Command *> _commands, Bot *_bot) : Command(), commands{_commands}, bot{_bot} {
+EditresultCommand::EditresultCommand(std::vector<Command *> _commands, Bot *_bot) : commands{_commands}, bot{_bot} {
     names.push_back("editcommand");
     names.push_back("edit");
 }

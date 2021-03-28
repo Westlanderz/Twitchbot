@@ -1,6 +1,6 @@
 #include "../../includes/commands/lurkcommand.hpp"
 
-LurkCommand::LurkCommand(Bot *_bot) : Command(), bot{_bot} {
+LurkCommand::LurkCommand(Bot *_bot) : bot{_bot} {
     names.push_back("lurk");
     result = "A lurk a day will keep twitch at bay.";
 }
