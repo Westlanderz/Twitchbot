@@ -212,13 +212,23 @@ std::string Bot::is_prefix(const std::string &channel) {
 }
 
 /**
- * @brief gets the file location for a certain channel
+ * @brief gets the timer file location for a certain channel
  * 
  * @param channel the channel to get the timer file of
  * @return std::string the file location for the channel
  */
 std::string Bot::is_timer_file(const std::string &channel) {
     return timerhandlers.at(channel)->is_timer_file();
+}
+
+/**
+ * @brief gets the commands file location for a certain channel
+ * 
+ * @param channel the channel to get the command file of
+ * @return std::string the file location for the channel
+ */
+std::string Bot::is_command_file(const std::string &channel) {
+    return commandhandlers.at(channel)->is_command_file();
 }
 
 /**
