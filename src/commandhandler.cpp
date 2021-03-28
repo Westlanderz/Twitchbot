@@ -65,7 +65,6 @@ void CommandHandler::init_command_list() {
     available_commands.push_back(new RemoveTimerCommand(bot));
     available_commands.push_back(new ListtimerCommand(bot));
     available_commands.push_back(new ListcommandsCommand(bot));
-    available_commands.push_back(new EditresultCommand(available_commands, bot));
     available_commands.push_back(new HelpCommand(available_commands, added_commands, bot));
 }
 

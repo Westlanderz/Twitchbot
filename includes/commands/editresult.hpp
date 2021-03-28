@@ -1,3 +1,5 @@
+// ! This function is depricated from now on
+
 #ifndef _editresult_h
 #define _editresult_h
 

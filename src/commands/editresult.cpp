@@ -1,3 +1,5 @@
+// ! This function is depricated from now on
+
 #include "../../includes/commands/editresult.hpp"
 
 EditresultCommand::EditresultCommand(std::vector<Command *> _commands, Bot *_bot) : commands{_commands}, bot{_bot} {
