@@ -2,7 +2,6 @@
 #include <fstream>
 #include "../includes/bot.hpp"
 #include "../includes/command.hpp"
-#include "../includes/commands/pingcommand.hpp"
 #include "../includes/commands/changeprefix.hpp"
 #include "../includes/commands/lurkcommand.hpp"
 #include "../includes/commands/helpcommand.hpp"
