@@ -14,6 +14,9 @@ class CommandHandler {
 
         void init_command_list();
         void search_command(std::string, bool, bool, std::string, std::string, std::string);
+        void add_command(std::string, std::string);
+        void remove_command(std::string, std::string);
+        std::string is_command_file();
 
     private:
         std::vector<Command *> available_commands;
