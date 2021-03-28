@@ -11,6 +11,7 @@
 #include "../includes/commands/edittimer.hpp"
 #include "../includes/commands/removetimer.hpp"
 #include "../includes/commands/listtimerscommand.hpp"
+#include "../includes/commands/listcommands.hpp"
 
 /**
  * @brief Construct a new Command Handler:: Command Handler object
@@ -63,6 +64,7 @@ void CommandHandler::init_command_list() {
     available_commands.push_back(new EditTimerCommand(bot));
     available_commands.push_back(new RemoveTimerCommand(bot));
     available_commands.push_back(new ListtimerCommand(bot));
+    available_commands.push_back(new ListcommandsCommand(bot));
     available_commands.push_back(new EditresultCommand(available_commands, bot));
     available_commands.push_back(new HelpCommand(available_commands, added_commands, bot));
 }
@@ -98,4 +100,38 @@ void CommandHandler::search_command(std::string command, bool mod, bool sub, std
         }
     }
     bot->send_chat_message(sender + " I do not recognise this command. Try !help to see a list of the commands.", channel);
+}
+
+/**
+ * @brief Add a command to the custom command list
+ * 
+ * @param command the command in full format to add
+ * @param channel the channel to send the response to
+ */
+void CommandHandler::add_command(std::string command, std::string channel) {
+    added_commands.push_back(command);
+    dynamic_cast<HelpCommand *>(available_commands.at(available_commands.size() - 1))->add_new_command(command, channel);
+}
+
+/**
+ * @brief Remove a command to the custom command list
+ * 
+ * @param command the command in full format to remove
+ * @param channel the channel to send the response to
+ */
+void CommandHandler::remove_command(std::string command, std::string channel) {
+    std::vector<std::string>::iterator rm = added_commands.end();
+    for(auto it = added_commands.begin(); it != added_commands.end(); it++) {
+        if(!strcmp(it->data(), command.c_str()))
+            rm = it;
+    }
+    if(rm != added_commands.end()) {
+        added_commands.erase(rm);
+        dynamic_cast<HelpCommand *>(available_commands.at(available_commands.size() - 1))->remove_command(command, channel);
+    } else
+        bot->send_chat_message("Cant remove this command", channel);
+}
+
+std::string CommandHandler::is_command_file() {
+    return file_location;
 }
