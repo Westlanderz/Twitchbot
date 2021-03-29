@@ -88,17 +88,37 @@ void CommandHandler::search_command(std::string command, bool mod, bool sub, std
             return;
         }
     }
-    for(auto &_command : added_commands) {
+    std::string _command{""};
+    bool found{false};
+    for(unsigned long i = 0; i < added_commands.size(); i++) {
+        _command = added_commands.at(i);
         std::size_t names_start = _command.find("Name:");
         std::size_t rights_start = _command.find("Rights:");
+        std::size_t count_start = _command.find("Count:");
+        std::size_t count_end = _command.find(" ", count_start);
+        std::size_t rests = _command.find(" Help:");
+        std::string count = std::to_string(std::stoi(_command.substr(count_start + 6, count_end - count_start - 6)) + 1);
         std::string command_to_find = _command.substr(names_start + 5, rights_start - names_start - 6);
-        if(!strcmp(command.c_str(), command_to_find.c_str())) {
+        std::string rights = _command.substr(rights_start + 7, count_start - rights_start - 8);
+        std::string rest = _command.substr(rests);
+        if(!strcmp(command.c_str(), command_to_find.c_str()) && (!strcmp(rights.c_str(), "all") || (sub && !strcmp(rights.c_str(), "sub")) || (mod && !strcmp(rights.c_str(), "mod")))) {
             std::string msg = _command.substr(_command.find("Result:") + 7);
             bot->send_chat_message(msg, channel);
-            return;
+            std::string editcommand = "Name:";
+            added_commands.at(i) = editcommand.append(command_to_find).append(" Rights:").append(rights).append(" Count:").append(count).append(rest);
+            found = true;
         }
     }
-    bot->send_chat_message(sender + " I do not recognise this command. Try !help to see a list of the commands.", channel);
+    if(found) {
+        std::fstream commands;
+        commands.open(file_location, std::ios::out);
+        for(auto &commands_to_write : added_commands) {
+            commands << commands_to_write;
+            commands << "\n\n";
+        }
+        commands.close();
+    } else 
+        bot->send_chat_message(sender + " I do not recognise this command. Try !help to see a list of the commands.", channel);
 }
 
 /**
