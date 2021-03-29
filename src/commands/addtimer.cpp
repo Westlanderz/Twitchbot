@@ -66,5 +66,3 @@ std::string AddTimerCommand::list_command() {
 std::string AddTimerCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " [name] [interval (min)] [message] to add a timed message to this channel.";
 }
-
-void AddTimerCommand::new_output(std::string) {}

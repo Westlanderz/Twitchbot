@@ -1,5 +1,5 @@
-#ifndef _bot_h
-#define _bot_h
+#ifndef bot_h
+#define bot_h
 
 #include <string>
 #include <vector>
@@ -44,4 +44,4 @@ class Bot {
         std::string owner;
 };
 
-#endif //_bot_h
+#endif //bot_h

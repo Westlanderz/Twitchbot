@@ -83,5 +83,3 @@ std::string RemoveTimerCommand::list_command() {
 std::string RemoveTimerCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " [name] to remove a timed message from this channel.";
 }
-
-void RemoveTimerCommand::new_output(std::string) {}

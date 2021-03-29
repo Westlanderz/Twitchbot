@@ -1,5 +1,5 @@
-#ifndef _chandler_h
-#define _chandler_h
+#ifndef chandler_h
+#define chandler_h
 
 #include <vector>
 #include <string>
@@ -25,4 +25,4 @@ class CommandHandler {
         std::string file_location;
 };
 
-#endif //_chandler_h
+#endif //chandler_h

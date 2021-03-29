@@ -69,5 +69,3 @@ std::string ListcommandsCommand::list_command() {
 std::string ListcommandsCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " to list all the added commands of this channel.";
 }
-
-void ListcommandsCommand::new_output(std::string) {}

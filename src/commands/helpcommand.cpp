@@ -96,8 +96,6 @@ std::string HelpCommand::generate_help_message(const std::string &) {
     return "I think you know how to use this command.....";
 }
 
-void HelpCommand::new_output(std::string) {}
-
 void HelpCommand::add_new_command(std::string command, std::string channel) {
     added_commands.push_back(command);
     bot->send_chat_message("Added the command to the list of commands", channel);

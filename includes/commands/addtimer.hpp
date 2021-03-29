@@ -1,5 +1,5 @@
-#ifndef _addtimer_h
-#define _addtimer_h
+#ifndef addtimer_h
+#define addtimer_h
 
 #include "../command.hpp"
 
@@ -12,12 +12,10 @@ class AddTimerCommand : public Command {
         bool find_name(std::string) override;
         std::string list_command() override;
         std::string generate_help_message(const std::string &) override;
-        void new_output(std::string) override;
 
     private:
         std::vector<std::string> names;
         Bot *bot;
-        std::string result;
 };
 
-#endif //_addtimer_h
+#endif //addtimer_h

@@ -46,5 +46,3 @@ std::string ChangePrefixCommand::list_command() {
 std::string ChangePrefixCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " [prefix] to change the prefix of this bot.";
 }
-
-void ChangePrefixCommand::new_output(std::string) {}

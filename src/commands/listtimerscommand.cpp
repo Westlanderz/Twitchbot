@@ -68,5 +68,3 @@ std::string ListtimerCommand::list_command() {
 std::string ListtimerCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " to get a list of all the timers on this channel.";
 }
-
-void ListtimerCommand::new_output(std::string) {}

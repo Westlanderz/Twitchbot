@@ -1,5 +1,5 @@
-#ifndef _command_h
-#define _command_h
+#ifndef command_h
+#define command_h
 
 #include "bot.hpp"
 
@@ -13,7 +13,6 @@ class Command {
         virtual bool find_name(std::string) = 0;
         virtual std::string list_command() = 0;
         virtual std::string generate_help_message(const std::string &) = 0;
-        virtual void new_output(std::string) = 0;
 };
 
-#endif //_command_h
+#endif //command_h

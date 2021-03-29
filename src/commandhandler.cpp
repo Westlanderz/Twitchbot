@@ -2,7 +2,6 @@
 #include <fstream>
 #include "../includes/bot.hpp"
 #include "../includes/command.hpp"
-#include "../includes/commands/pingcommand.hpp"
 #include "../includes/commands/changeprefix.hpp"
 #include "../includes/commands/lurkcommand.hpp"
 #include "../includes/commands/helpcommand.hpp"
@@ -57,7 +56,6 @@ void CommandHandler::init_command_list() {
         }
         commandfile.close();
     }
-    available_commands.push_back(new PingCommand(bot));
     available_commands.push_back(new ChangePrefixCommand(bot));
     available_commands.push_back(new LurkCommand(bot));
     available_commands.push_back(new AddTimerCommand(bot));
