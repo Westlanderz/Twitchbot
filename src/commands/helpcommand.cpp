@@ -62,10 +62,10 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
         }
         for(auto &command : allowed_command) {
             std::size_t name_starts = command.find("Name:");
-            std::string named = command.substr(name_starts + 5, command.find("Rights:", name_starts) - name_starts - 7);
+            std::string named = command.substr(name_starts + 5, command.find("Rights:", name_starts) - name_starts - 6);
             help_msg.append(named);
             std::size_t named_start = allowed_command.at(allowed_command.size() - 1).find("Name:");
-            if(!strcmp(allowed_command.at(allowed_command.size() - 1).substr(named_start + 5, command.find("Rights:", named_start) - named_start - 7).c_str(), named.c_str())) {
+            if(!strcmp(allowed_command.at(allowed_command.size() - 1).substr(named_start + 5, command.find("Rights:", named_start) - named_start - 6).c_str(), named.c_str())) {
                 help_msg.append(". ");
             } else {
                 help_msg.append(", ");
@@ -98,7 +98,6 @@ std::string HelpCommand::generate_help_message(const std::string &) {
 
 void HelpCommand::add_new_command(std::string command, std::string channel) {
     added_commands.push_back(command);
-    bot->send_chat_message("Added the command to the list of commands", channel);
 }
 
 void HelpCommand::remove_command(std::string command, std::string channel) {

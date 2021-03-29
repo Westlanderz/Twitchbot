@@ -11,6 +11,7 @@
 #include "../includes/commands/removetimer.hpp"
 #include "../includes/commands/listtimerscommand.hpp"
 #include "../includes/commands/listcommands.hpp"
+#include "../includes/commands/addcommand.hpp"
 
 /**
  * @brief Construct a new Command Handler:: Command Handler object
@@ -62,6 +63,7 @@ void CommandHandler::init_command_list() {
     available_commands.push_back(new EditTimerCommand(bot));
     available_commands.push_back(new RemoveTimerCommand(bot));
     available_commands.push_back(new ListtimerCommand(bot));
+    available_commands.push_back(new Addcommand(bot));
     available_commands.push_back(new ListcommandsCommand(bot));
     available_commands.push_back(new HelpCommand(available_commands, added_commands, bot));
 }
@@ -89,7 +91,7 @@ void CommandHandler::search_command(std::string command, bool mod, bool sub, std
     for(auto &_command : added_commands) {
         std::size_t names_start = _command.find("Name:");
         std::size_t rights_start = _command.find("Rights:");
-        std::string command_to_find = _command.substr(names_start + 5, rights_start - names_start - 7);
+        std::string command_to_find = _command.substr(names_start + 5, rights_start - names_start - 6);
         if(!strcmp(command.c_str(), command_to_find.c_str())) {
             std::string msg = _command.substr(_command.find("Result:") + 7);
             bot->send_chat_message(msg, channel);
