@@ -3,9 +3,9 @@
 
 #include "../command.hpp"
 
-class RemovecomamndCommand : public Command {
+class RemovecommandCommand : public Command {
     public:
-        RemovecomamndCommand(Bot *);
+        RemovecommandCommand(Bot *);
 
         void execute(std::string, std::string, bool, bool, std::string) override;
         bool has_perms_to_run(bool, bool, std::string) override;
