@@ -15,7 +15,7 @@ void RemoveTimerCommand::execute(std::string, std::string original_msg, bool, bo
     std::vector<std::string> timers_string;
     timers.open(file, std::fstream::in);
     if (!timers) {
-		std::cerr << "No timer file for this channel file" << std::endl;
+		std::cerr << "No timer file for this channel" << std::endl;
 	} else {
         std::string timer;
         std::string line;
@@ -83,5 +83,3 @@ std::string RemoveTimerCommand::list_command() {
 std::string RemoveTimerCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " [name] to remove a timed message from this channel.";
 }
-
-void RemoveTimerCommand::new_output(std::string) {}

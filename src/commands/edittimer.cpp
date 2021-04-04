@@ -112,6 +112,3 @@ std::string EditTimerCommand::list_command() {
 std::string EditTimerCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " [name] [message] to edit a timed message from this channel.";
 }
-
-void EditTimerCommand::new_output(std::string) {}
-

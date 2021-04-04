@@ -1,5 +1,5 @@
-#ifndef _help_h
-#define _help_h
+#ifndef help_h
+#define help_h
 
 #include "../command.hpp"
 
@@ -12,7 +12,6 @@ class HelpCommand : public Command {
         bool find_name(std::string) override;
         std::string list_command() override;
         std::string generate_help_message(const std::string &) override;
-        void new_output(std::string) override;
         void add_new_command(std::string, std::string);
         void remove_command(std::string, std::string);
 
@@ -23,4 +22,4 @@ class HelpCommand : public Command {
         Bot *bot;
 };
 
-#endif //_help_h
+#endif //help_h

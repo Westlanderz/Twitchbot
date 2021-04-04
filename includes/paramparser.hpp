@@ -1,5 +1,5 @@
-#ifndef _paramparser_h
-#define _paramparser_h
+#ifndef paramparser_h
+#define paramparser_h
 
 #include <vector>
 #include <string>
@@ -16,7 +16,7 @@ class ParamParser {
         std::vector<std::string> params;
 };
 
-#endif //_paramparser_h
+#endif //paramparser_h
 
 
 /**

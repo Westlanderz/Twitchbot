@@ -1,5 +1,5 @@
-#ifndef _timerhandler_h
-#define _timerhandler_h
+#ifndef timerhandler_h
+#define timerhandler_h
 
 #include <string>
 
@@ -22,4 +22,4 @@ class TimerHandler {
         Bot *bot;
 };
 
-#endif //_timerhandler_h
+#endif //timerhandler_h

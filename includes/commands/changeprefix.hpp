@@ -1,5 +1,5 @@
-#ifndef _change_prefix_h
-#define _change_prefix_h
+#ifndef change_prefix_h
+#define change_prefix_h
 
 #include "../command.hpp"
 
@@ -12,12 +12,10 @@ class ChangePrefixCommand : public Command {
         bool find_name(std::string) override;
         std::string list_command() override;
         std::string generate_help_message(const std::string &) override;
-        void new_output(std::string) override;
 
     private:
         std::vector<std::string> names;
         Bot *bot;
-        std::string result;
 };
 
-#endif //_change_prefix_h
+#endif //change_prefix_h

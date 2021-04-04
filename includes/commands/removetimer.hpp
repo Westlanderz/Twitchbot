@@ -1,5 +1,5 @@
-#ifndef _rmtimer_h
-#define _rmtimer_h
+#ifndef rmtimer_h
+#define rmtimer_h
 
 #include "../command.hpp"
 
@@ -12,12 +12,10 @@ class RemoveTimerCommand : public Command {
         bool find_name(std::string) override;
         std::string list_command() override;
         std::string generate_help_message(const std::string &) override;
-        void new_output(std::string) override;
 
     private:
         std::vector<std::string> names;
         Bot *bot;
-        std::string result;
 };
 
-#endif //_rmtimer_h
+#endif //rmtimer_h

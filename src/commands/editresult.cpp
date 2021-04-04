@@ -18,7 +18,7 @@ void EditresultCommand::execute(std::string sender, std::string original_msg, bo
                     std::size_t find_result = original_msg.find(" ", find_change);
                     if(find_result != std::string::npos) {
                         std::string result = original_msg.substr(find_result + 1);
-                        _command->new_output(result);
+                        // _command->new_output(result);
                         std::string new_result = sender;
                         new_result.append(" i changed the output for ");
                         new_result.append(_command->list_command());
@@ -58,5 +58,3 @@ std::string EditresultCommand::list_command() {
 std::string EditresultCommand::generate_help_message(const std::string &channel) {
     return "Use " + bot->is_prefix(channel) + names[0] + " [command] [new-result] to change the output of that command.";
 }
-
-void EditresultCommand::new_output(std::string) {}
