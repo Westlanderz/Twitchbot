@@ -15,7 +15,7 @@ void RemoveTimerCommand::execute(std::string, std::string original_msg, bool, bo
     std::vector<std::string> timers_string;
     timers.open(file, std::fstream::in);
     if (!timers) {
-		std::cerr << "No timer file for this channel file" << std::endl;
+		std::cerr << "No timer file for this channel" << std::endl;
 	} else {
         std::string timer;
         std::string line;
