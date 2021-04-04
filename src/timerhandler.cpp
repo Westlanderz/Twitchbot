@@ -20,7 +20,7 @@ TimerHandler::TimerHandler(std::string _channel, Bot *_bot)
             if(!file){
                 std::cerr << "file cant be opened" << std::endl;
             } else {
-                std::string tmp = "Name:autogen Interval:1 Last send:";
+                std::string tmp = "Name:autogen Interval:30 Last send:";
                 auto now = std::chrono::system_clock::now();
                 time_t times = std::chrono::system_clock::to_time_t(now);
                 tm *local_times = localtime(&times);
