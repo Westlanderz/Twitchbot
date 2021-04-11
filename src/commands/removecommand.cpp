@@ -39,7 +39,7 @@ void RemovecommandCommand::execute(std::string, std::string original_msg, bool, 
                 if(find_name != std::string::npos) {
                     std::string command_name = _command.substr(find_name + 1, end_name - find_name - 1);
                     if(!strcmp(timer_to_edit.c_str(), command_name.c_str())) {
-                        bot->send_chat_message("Removed the timer with name " + command_name, channel);
+                        bot->send_chat_message("Removed the command with name " + command_name, channel);
                         bot->is_commandhandler(channel)->remove_command(_command, channel);
                         rmcommand = it;
                     }
