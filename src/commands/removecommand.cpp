@@ -31,7 +31,7 @@ void RemovecommandCommand::execute(std::string, std::string original_msg, bool, 
         std::size_t find_command = original_msg.find(" ");
         if(find_command != std::string::npos) {
             std::string timer_to_edit = original_msg.substr(find_command + 1);
-            std::vector<std::string>::iterator rmcommand;
+            std::vector<std::string>::iterator rmcommand = commands_string.end();
             for(auto it = commands_string.begin(); it != commands_string.end(); ++it) {
                 std::string _command = it->data();
                 std::size_t find_name = _command.find(":");
@@ -45,7 +45,8 @@ void RemovecommandCommand::execute(std::string, std::string original_msg, bool, 
                     }
                 }
             }
-            commands_string.erase(rmcommand);
+            if(rmcommand != commands_string.end())
+                commands_string.erase(rmcommand);
         }
     }
     std::fstream output;
