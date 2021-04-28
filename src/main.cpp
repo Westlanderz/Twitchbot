@@ -16,7 +16,7 @@
 int main(void) {
     std::string host = "irc.chat.twitch.tv";
     in_port_t port = 6667;
-    sockpp::tcp_connector *conn = new sockpp::tcp_connector(sockpp::inet_address(host, port));
+    sockpp::tcp_connector conn = sockpp::tcp_connector(sockpp::inet_address(host, port));
     
     std::cout << "connected to " << sockpp::inet_address(host, port) << std::endl;
 
@@ -55,7 +55,7 @@ int main(void) {
     }
     channel_file.close();
 
-    Bot *bot = new Bot("Westlanderz", channels, "!", conn);
+    Bot *bot = new Bot("Westlanderz", channels, "!", &conn);
 
     try{
         bot->log_in(oauthcode);
