@@ -24,11 +24,11 @@ There are many excisting great twitchbots, like Nightbot, streamelements and Str
 
 This bot, when its run by me, has three versions: first we have a stable version, second we have a beta version with new not extensively tested features and last we have a dev build, this is basically an alpha build that has not been tested yet and changes a lot. Below this you can check the current build statusses of all these builds.
 
-[![Status Stable](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/master?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/master)
-
-[![Status Beta](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Beta-Releases?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Beta-Releases)
-
-[![Status Dev](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Development?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Development)
+| Version        | Build status        |
+| ------------- |:-------------:|
+| **Master**     | [![Status Stable](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/master?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/master) |
+| **Beta**     | [![Status Beta](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Beta-Releases?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Beta-Releases)      |
+| **Dev** | [![Status Dev](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Development?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Development)     |
 
 ## Getting started
 
