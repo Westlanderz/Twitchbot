@@ -18,7 +18,7 @@
 
 ## About
 
-There are many excisting great twitchbots, like Nightbot, streamelements and Streamlabs. However, I did not like any of those in particular so I decided to make my own bot. I wanted it to be fast in processing commands so that is why it is made in C++ and with the addition of asynchronous processing of messages. You can either run this on your own PC or server, or you could ask me to run it for you as it is build to connect and handle multiple messages.
+There are many excisting great twitchbots, like Nightbot, streamelements and Streamlabs. However, I did not like any of those in particular so I decided to make my own bot. I wanted it to be fast in processing commands so that is why it is made in C++ and with the addition of asynchronous processing of messages. You can either run this on your own PC or server, or you could ask me to run it for you as it is build to connect to multiple channels and handle multiple messages at the same time.
 
 ### Status
 
