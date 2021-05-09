@@ -2,4 +2,5 @@
 *.o
 *.d
 build
+designs
 .vscode
