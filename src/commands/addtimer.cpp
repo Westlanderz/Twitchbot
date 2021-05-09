@@ -1,14 +1,16 @@
 #include "../../includes/commands/addtimer.hpp"
 #include "../../includes/timerhandler.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 #include <fstream>
 #include <chrono>
 
-AddTimerCommand::AddTimerCommand(Bot *_bot) : bot{_bot} {
+AddTimerCommand::AddTimerCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("addtimer");
 }
 
 void AddTimerCommand::execute(std::string, std::string original_msg, bool, bool, std::string channel) {
-    std::string file = bot->is_timer_file(channel);
+    std::string file = handler->uses_bot()->is_timer_file(channel);
     std::fstream timer_file;
     std::string new_timer{""};
     timer_file.open(file, std::ios::app);
@@ -35,18 +37,18 @@ void AddTimerCommand::execute(std::string, std::string original_msg, bool, bool,
                     new_timer = name.append(interval).append(" Last send:").append(new_time).append(message).append("\n\n");
                     timer_file << new_timer;
                     timer_file.close();
-                    bot->is_timerhandler(channel)->add_timer();
-                    bot->send_chat_message("Added the timer to the listed timers", channel);
+                    handler->uses_bot()->is_timerhandler(channel)->add_timer();
+                    handler->uses_bot()->send_chat_message("Added the timer to the listed timers", channel);
                     return;
                 }
             }
         }
     }
-    bot->send_chat_message("Please provide all the arguments to the timer. For more info use !help addtimer", channel);
+    handler->uses_bot()->send_chat_message("Please provide all the arguments to the timer. For more info use !help addtimer", channel);
 }
 
 bool AddTimerCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -64,5 +66,5 @@ std::string AddTimerCommand::list_command() {
 }
 
 std::string AddTimerCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [name] [interval (min)] [message] to add a timed message to this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [name] [interval (min)] [message] to add a timed message to this channel.";
 }

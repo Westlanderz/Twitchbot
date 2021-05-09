@@ -1,8 +1,9 @@
 #include "../../includes/commands/removecommand.hpp"
 #include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 #include <fstream>
 
-RemovecommandCommand::RemovecommandCommand(Bot *_bot) : bot{bot} {
+RemovecommandCommand::RemovecommandCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("removecommand");
     names.push_back("rmcommand");
     names.push_back("removecmd");
@@ -10,7 +11,7 @@ RemovecommandCommand::RemovecommandCommand(Bot *_bot) : bot{bot} {
 }
 
 void RemovecommandCommand::execute(std::string, std::string original_msg, bool, bool, std::string channel) {
-    std::string file = bot->is_command_file(channel);
+    std::string file = handler->uses_bot()->is_command_file(channel);
     std::fstream commands;
     std::string tmp_result{""};
     std::vector<std::string> commands_string;
@@ -39,8 +40,8 @@ void RemovecommandCommand::execute(std::string, std::string original_msg, bool, 
                 if(find_name != std::string::npos) {
                     std::string command_name = _command.substr(find_name + 1, end_name - find_name - 1);
                     if(!strcmp(timer_to_edit.c_str(), command_name.c_str())) {
-                        bot->send_chat_message("Removed the timer with name " + command_name, channel);
-                        bot->is_commandhandler(channel)->remove_command(_command, channel);
+                        handler->uses_bot()->send_chat_message("Removed the timer with name " + command_name, channel);
+                        handler->uses_bot()->is_commandhandler(channel)->remove_command(_command, channel);
                         rmcommand = it;
                     }
                 }
@@ -62,7 +63,7 @@ void RemovecommandCommand::execute(std::string, std::string original_msg, bool, 
 }
 
 bool RemovecommandCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -80,6 +81,6 @@ std::string RemovecommandCommand::list_command() {
 }
 
 std::string RemovecommandCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [name] to remove a custom command from this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [name] to remove a custom command from this channel.";
 }
 

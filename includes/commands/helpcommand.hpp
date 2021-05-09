@@ -3,9 +3,11 @@
 
 #include "../command.hpp"
 
+class CommandHandler;
+
 class HelpCommand : public Command {
     public:
-        HelpCommand(std::vector<Command *>, std::vector<std::string>, Bot *);
+        HelpCommand(std::vector<Command *>, std::vector<std::string>, CommandHandler *);
 
         void execute(std::string, std::string, bool, bool, std::string) override;
         bool has_perms_to_run(bool, bool, std::string) override;
@@ -19,7 +21,7 @@ class HelpCommand : public Command {
         std::vector<std::string> names;
         std::vector<Command *> commands;
         std::vector<std::string> added_commands;
-        Bot *bot;
+        CommandHandler *handler;
 };
 
 #endif //help_h

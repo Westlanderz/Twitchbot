@@ -1,13 +1,15 @@
 #include "../../includes/commands/edittimer.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 #include <fstream>
 #include <chrono>
 
-EditTimerCommand::EditTimerCommand(Bot *_bot) : bot{_bot} {
+EditTimerCommand::EditTimerCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("edittimer");
 }
 
 void EditTimerCommand::execute(std::string sender, std::string original_msg, bool, bool, std::string channel) {
-    std::string file = bot->is_timer_file(channel);
+    std::string file = handler->uses_bot()->is_timer_file(channel);
     std::fstream timers;
     std::string tmp_result{""};
     std::vector<std::string> timers_string;
@@ -86,13 +88,13 @@ void EditTimerCommand::execute(std::string sender, std::string original_msg, boo
     output.close();
 
     if(found)
-        bot->send_chat_message("Editted the timer for you " + sender, channel);
+        handler->uses_bot()->send_chat_message("Editted the timer for you " + sender, channel);
     else
-        bot->send_chat_message("Could not find the timer you were looking for " + sender + " please make sure you have written the name correctly", channel);
+        handler->uses_bot()->send_chat_message("Could not find the timer you were looking for " + sender + " please make sure you have written the name correctly", channel);
 }
 
 bool EditTimerCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -110,5 +112,5 @@ std::string EditTimerCommand::list_command() {
 }
 
 std::string EditTimerCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [name] [message] to edit a timed message from this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [name] [message] to edit a timed message from this channel.";
 }

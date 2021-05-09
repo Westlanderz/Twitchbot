@@ -1,13 +1,16 @@
 #include "../../includes/commands/listtimerscommand.hpp"
+#include "../../includes/timerhandler.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 #include <fstream>
 #include <vector>
 
-ListtimerCommand::ListtimerCommand(Bot *_bot) : bot{_bot} {
+ListtimerCommand::ListtimerCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("listtimers");
 }
 
 void ListtimerCommand::execute(std::string, std::string, bool, bool, std::string channel) {
-    std::string file = bot->is_timer_file(channel);
+    std::string file = handler->uses_bot()->is_timer_file(channel);
     std::fstream timers;
     std::vector<std::string> timers_list, output_list;
     timers.open(file, std::ios::in);
@@ -43,12 +46,12 @@ void ListtimerCommand::execute(std::string, std::string, bool, bool, std::string
                 help_msg.append(", ");
             }
         }
-        bot->send_chat_message(help_msg, channel);
+        handler->uses_bot()->send_chat_message(help_msg, channel);
     }
 }
 
 bool ListtimerCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -66,5 +69,5 @@ std::string ListtimerCommand::list_command() {
 }
 
 std::string ListtimerCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " to get a list of all the timers on this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " to get a list of all the timers on this channel.";
 }

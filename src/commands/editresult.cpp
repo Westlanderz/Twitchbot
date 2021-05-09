@@ -1,8 +1,10 @@
 // ! This function is depricated from now on
 
 #include "../../includes/commands/editresult.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 
-EditresultCommand::EditresultCommand(std::vector<Command *> _commands, Bot *_bot) : commands{_commands}, bot{_bot} {
+EditresultCommand::EditresultCommand(std::vector<Command *> _commands, CommandHandler *_handler) : commands{_commands}, handler{_handler} {
     names.push_back("editcommand");
     names.push_back("edit");
 }
@@ -23,22 +25,22 @@ void EditresultCommand::execute(std::string sender, std::string original_msg, bo
                         new_result.append(" i changed the output for ");
                         new_result.append(_command->list_command());
                         new_result.append(" for you.");
-                        bot->send_chat_message(new_result, channel);
+                        handler->uses_bot()->send_chat_message(new_result, channel);
                     } else {
-                        bot->send_chat_message("Please provide a new result to change to.", channel);
+                        handler->uses_bot()->send_chat_message("Please provide a new result to change to.", channel);
                     }
                     return;
                 }
             }
-            bot->send_chat_message("I dont know that command, so i cant edit it.", channel);
+            handler->uses_bot()->send_chat_message("I dont know that command, so i cant edit it.", channel);
         }
     } else {
-        bot->send_chat_message("Please provide a command to change the result from.", channel);
+        handler->uses_bot()->send_chat_message("Please provide a command to change the result from.", channel);
     }
 }
 
 bool EditresultCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -56,5 +58,5 @@ std::string EditresultCommand::list_command() {
 }
 
 std::string EditresultCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [command] [new-result] to change the output of that command.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [command] [new-result] to change the output of that command.";
 }

@@ -1,15 +1,16 @@
 #include "../../includes/commands/addcommand.hpp"
 #include <fstream>
 #include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 
-Addcommand::Addcommand(Bot *_bot) : bot{_bot} {
+Addcommand::Addcommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("addcommand");
     names.push_back("add-command");
     names.push_back("addcmd");
 }
 
 void Addcommand::execute(std::string, std::string original_msg, bool, bool, std::string channel) {
-    std::string file = bot->is_command_file(channel);
+    std::string file = handler->uses_bot()->is_command_file(channel);
     std::fstream command_file;
     std::string new_command{""};
     command_file.open(file, std::ios::app);
@@ -33,19 +34,19 @@ void Addcommand::execute(std::string, std::string original_msg, bool, bool, std:
                         new_command = name.append(rights).append(" Count:0").append(help).append(message).append("\n\n");
                         command_file << new_command;
                         command_file.close();
-                        bot->is_commandhandler(channel)->add_command(new_command, channel);
-                        bot->send_chat_message("Added the command to the listed commands", channel);
+                        handler->uses_bot()->is_commandhandler(channel)->add_command(new_command, channel);
+                        handler->uses_bot()->send_chat_message("Added the command to the listed commands", channel);
                         return;
                     }
                 }      
             }
         }
     }
-    bot->send_chat_message("Please provide all the arguments to the command adder. For more info use !help addcommand", channel);
+    handler->uses_bot()->send_chat_message("Please provide all the arguments to the command adder. For more info use !help addcommand", channel);
 }
 
 bool Addcommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -63,5 +64,5 @@ std::string Addcommand::list_command() {
 }
 
 std::string Addcommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [name] [rights {all | sub | mod}] [helpmessage <h:>] [message <m:>] to add a new command to this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [name] [rights {all | sub | mod}] [helpmessage <h:>] [message <m:>] to add a new command to this channel.";
 }

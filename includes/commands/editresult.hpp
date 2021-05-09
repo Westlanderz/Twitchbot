@@ -5,9 +5,11 @@
 
 #include "../command.hpp"
 
+class CommandHandler;
+
 class EditresultCommand : public Command {
     public:
-        EditresultCommand(std::vector<Command *>, Bot *);
+        EditresultCommand(std::vector<Command *>, CommandHandler *);
 
         void execute(std::string, std::string, bool, bool, std::string) override;
         bool has_perms_to_run(bool, bool, std::string) override;
@@ -18,7 +20,7 @@ class EditresultCommand : public Command {
     private:
         std::vector<std::string> names;
         std::vector<Command *> commands;
-        Bot *bot;
+        CommandHandler *handler;
 };
 
 #endif //editresult_h

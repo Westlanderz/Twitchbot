@@ -1,8 +1,6 @@
 #ifndef command_h
 #define command_h
 
-#include "bot.hpp"
-
 class Command {
     public:
         Command() = default;

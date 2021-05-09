@@ -1,14 +1,16 @@
 #include "../../includes/commands/listcommands.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 #include <fstream>
 
-ListcommandsCommand::ListcommandsCommand(Bot *_bot) : bot{_bot} {
+ListcommandsCommand::ListcommandsCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("listcommands");
     names.push_back("listcmd");
     names.push_back("listcommand");
 }
 
 void ListcommandsCommand::execute(std::string sender, std::string original_msg, bool mod, bool sub, std::string channel) {
-    std::string file = bot->is_command_file(channel);
+    std::string file = handler->uses_bot()->is_command_file(channel);
     std::fstream commands;
     std::vector<std::string> command_list, output_list;
     commands.open(file, std::ios::in);
@@ -44,12 +46,12 @@ void ListcommandsCommand::execute(std::string sender, std::string original_msg, 
                 help_msg.append(", ");
             }
         }
-        bot->send_chat_message(help_msg, channel);
+        handler->uses_bot()->send_chat_message(help_msg, channel);
     }
 }
 
 bool ListcommandsCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -67,5 +69,5 @@ std::string ListcommandsCommand::list_command() {
 }
 
 std::string ListcommandsCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " to list all the added commands of this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " to list all the added commands of this channel.";
 }

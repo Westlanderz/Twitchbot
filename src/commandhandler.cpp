@@ -57,15 +57,15 @@ void CommandHandler::init_command_list() {
         }
         commandfile.close();
     }
-    available_commands.push_back(new ChangePrefixCommand(bot));
-    available_commands.push_back(new LurkCommand(bot));
-    available_commands.push_back(new AddTimerCommand(bot));
-    available_commands.push_back(new EditTimerCommand(bot));
-    available_commands.push_back(new RemoveTimerCommand(bot));
-    available_commands.push_back(new ListtimerCommand(bot));
-    available_commands.push_back(new Addcommand(bot));
-    available_commands.push_back(new ListcommandsCommand(bot));
-    available_commands.push_back(new HelpCommand(available_commands, added_commands, bot));
+    available_commands.push_back(new ChangePrefixCommand(this));
+    available_commands.push_back(new LurkCommand(this));
+    available_commands.push_back(new AddTimerCommand(this));
+    available_commands.push_back(new EditTimerCommand(this));
+    available_commands.push_back(new RemoveTimerCommand(this));
+    available_commands.push_back(new ListtimerCommand(this));
+    available_commands.push_back(new Addcommand(this));
+    available_commands.push_back(new ListcommandsCommand(this));
+    available_commands.push_back(new HelpCommand(available_commands, added_commands, this));
 }
 
 /**
@@ -153,4 +153,8 @@ void CommandHandler::remove_command(std::string command, std::string channel) {
 
 std::string CommandHandler::is_command_file() {
     return file_location;
+}
+
+Bot * CommandHandler::uses_bot() {
+    return bot;
 }

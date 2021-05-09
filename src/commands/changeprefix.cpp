@@ -1,6 +1,8 @@
 #include "../../includes/commands/changeprefix.hpp"
+#include "../../includes/bot.hpp"
+#include "../../includes/commandhandler.hpp"
 
-ChangePrefixCommand::ChangePrefixCommand(Bot *_bot) : bot{_bot} {
+ChangePrefixCommand::ChangePrefixCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("changeprefix");
     names.push_back("change-prefix");
     names.push_back("change_prefix");
@@ -13,20 +15,20 @@ void ChangePrefixCommand::execute(std::string, std::string original_msg, bool, b
         std::size_t prefix_end = original_msg.find(" ", find_prefix + 1);
         if(prefix_end != std::string::npos) {
             new_prefix = original_msg.substr(find_prefix + 1, prefix_end - find_prefix);
-            bot->new_prefix(new_prefix, channel);
-            bot->send_chat_message("Changed the prefix to " + new_prefix, channel);
+            handler->uses_bot()->new_prefix(new_prefix, channel);
+            handler->uses_bot()->send_chat_message("Changed the prefix to " + new_prefix, channel);
         } else {
             new_prefix = original_msg.substr(find_prefix + 1);
-            bot->new_prefix(new_prefix, channel);
-            bot->send_chat_message("Changed the prefix to " + new_prefix, channel);
+            handler->uses_bot()->new_prefix(new_prefix, channel);
+            handler->uses_bot()->send_chat_message("Changed the prefix to " + new_prefix, channel);
         }
     } else {
-        bot->send_chat_message("Please provide a new prefix to change to", channel);
+        handler->uses_bot()->send_chat_message("Please provide a new prefix to change to", channel);
     }
 }
 
 bool ChangePrefixCommand::has_perms_to_run(bool, bool, std::string sender) {
-    if(bot->is_channel(sender) || bot->is_owner(sender))
+    if(handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false; 
 }
@@ -44,5 +46,5 @@ std::string ChangePrefixCommand::list_command() {
 }
 
 std::string ChangePrefixCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [prefix] to change the prefix of this bot.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [prefix] to change the prefix of this bot.";
 }

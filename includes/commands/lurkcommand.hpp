@@ -3,9 +3,11 @@
 
 #include "../command.hpp"
 
+class CommandHandler;
+
 class LurkCommand : public Command {
     public:
-        LurkCommand(Bot *);
+        LurkCommand(CommandHandler *);
 
         void execute(std::string, std::string, bool, bool, std::string) override;
         bool has_perms_to_run(bool, bool, std::string) override;
@@ -15,7 +17,7 @@ class LurkCommand : public Command {
 
     private:
         std::vector<std::string> names;
-        Bot *bot;
+        CommandHandler *handler;
 };
 
 #endif //lurk_h

@@ -1,6 +1,9 @@
 #include "../../includes/commands/helpcommand.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 
-HelpCommand::HelpCommand(std::vector<Command *> _commands, std::vector<std::string> __commands, Bot *_bot) : commands{_commands}, added_commands{__commands}, bot{_bot} {
+HelpCommand::HelpCommand(std::vector<Command *> _commands, std::vector<std::string> __commands, CommandHandler *_handler) 
+: commands{_commands}, added_commands{__commands}, handler{_handler} {
     names.push_back("commands");
     names.push_back("help");
 }
@@ -13,7 +16,10 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
             allowed_commands.push_back(command);
     }
     for(auto &command : added_commands) {
-        if(!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "all") || (!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "sub") && sub) || (!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "mod") && mod) || bot->is_channel(sender) || bot->is_owner(sender))
+        if(!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "all") 
+        || (!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "sub") && sub) 
+        || (!strcmp(command.substr(command.find("Rights:") + 7, 3).c_str(), "mod") && mod) 
+        || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
             allowed_command.push_back(command);
     }
     std::size_t find_args = original_msg.find(" ");
@@ -28,7 +34,7 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
         bool found{false};
         for(auto &command : allowed_commands) {
             if(!strcmp(command->list_command().c_str(), command_name.c_str())) {
-                bot->send_chat_message(command->generate_help_message(channel), channel);
+                handler->uses_bot()->send_chat_message(command->generate_help_message(channel), channel);
                 found = true;
                 break;
             }
@@ -38,17 +44,17 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
             std::string name = command.substr(name_start + 5, command.find("Rights:", name_start) - name_start - 7);
             if(!strcmp(name.c_str(), command_name.c_str())) {
                 std::size_t help_start = command.find("Help:");
-                std::string help_msg = "Use " + bot->is_prefix(channel);
+                std::string help_msg = "Use " + handler->uses_bot()->is_prefix(channel);
                 help_msg.append(name);
                 help_msg.append(" ");
                 help_msg.append(command.substr(help_start + 5, command.find("Result:", help_start) - help_start - 7));
-                bot->send_chat_message(help_msg, channel);
+                handler->uses_bot()->send_chat_message(help_msg, channel);
                 found = true;
                 break;
             }
         }
         if(!found) {
-            bot->send_chat_message("Could not find the command you were looking for.", channel);
+            handler->uses_bot()->send_chat_message("Could not find the command you were looking for.", channel);
         }
     } else {
         std::string help_msg = "Here is a list of commands you can run: ";
@@ -71,8 +77,8 @@ void HelpCommand::execute(std::string sender, std::string original_msg, bool mod
                 help_msg.append(", ");
             }
         }
-        help_msg.append("Try " + bot->is_prefix(channel) +  "help " + names[0] + " to learn more about one of them. Version: 1.3.0-dev https://github.com/Westlanderz/TwitchBot");
-        bot->send_chat_message(help_msg, channel);
+        help_msg.append("Try " + handler->uses_bot()->is_prefix(channel) +  "help " + names[0] + " to learn more about one of them. Version: 1.3.0-dev https://github.com/Westlanderz/TwitchBot");
+        handler->uses_bot()->send_chat_message(help_msg, channel);
     }
 }
 
@@ -109,5 +115,5 @@ void HelpCommand::remove_command(std::string command, std::string channel) {
     if(rm != added_commands.end())
         added_commands.erase(rm);
     else
-        bot->send_chat_message("Cant remove this command", channel);
+        handler->uses_bot()->send_chat_message("Cant remove this command", channel);
 }

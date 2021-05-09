@@ -1,15 +1,17 @@
 #include "../../includes/commands/removetimer.hpp"
 #include "../../includes/timerhandler.hpp"
+#include "../../includes/commandhandler.hpp"
+#include "../../includes/bot.hpp"
 #include <fstream>
 #include <iostream>
 
-RemoveTimerCommand::RemoveTimerCommand(Bot *_bot) : bot{_bot} {
+RemoveTimerCommand::RemoveTimerCommand(CommandHandler *_handler) : handler{_handler} {
     names.push_back("removetimer");
     names.push_back("rmtimer");
 }
 
 void RemoveTimerCommand::execute(std::string, std::string original_msg, bool, bool, std::string channel) {
-    std::string file = bot->is_timer_file(channel);
+    std::string file = handler->uses_bot()->is_timer_file(channel);
     std::fstream timers;
     std::string tmp_result{""};
     std::vector<std::string> timers_string;
@@ -39,8 +41,8 @@ void RemoveTimerCommand::execute(std::string, std::string original_msg, bool, bo
                 if(find_name != std::string::npos) {
                     std::string timer_name = _timer.substr(find_name + 1, end_name - find_name - 1);
                     if(!strcmp(timer_to_edit.c_str(), timer_name.c_str())) {
-                        bot->send_chat_message("Removed the timer with name " + timer_name, channel);
-                        bot->is_timerhandler(channel)->remove_timer();
+                        handler->uses_bot()->send_chat_message("Removed the timer with name " + timer_name, channel);
+                        handler->uses_bot()->is_timerhandler(channel)->remove_timer();
                         rmtimer = it;
                     }
                 }
@@ -63,7 +65,7 @@ void RemoveTimerCommand::execute(std::string, std::string original_msg, bool, bo
 }
 
 bool RemoveTimerCommand::has_perms_to_run(bool mod, bool, std::string sender) {
-    if(mod || bot->is_channel(sender) || bot->is_owner(sender))
+    if(mod || handler->uses_bot()->is_channel(sender) || handler->uses_bot()->is_owner(sender))
         return true;
     return false;
 }
@@ -81,5 +83,5 @@ std::string RemoveTimerCommand::list_command() {
 }
 
 std::string RemoveTimerCommand::generate_help_message(const std::string &channel) {
-    return "Use " + bot->is_prefix(channel) + names[0] + " [name] to remove a timed message from this channel.";
+    return "Use " + handler->uses_bot()->is_prefix(channel) + names[0] + " [name] to remove a timed message from this channel.";
 }

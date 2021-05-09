@@ -17,6 +17,7 @@ class CommandHandler {
         void add_command(std::string, std::string);
         void remove_command(std::string, std::string);
         std::string is_command_file();
+        Bot * uses_bot();
 
     private:
         std::vector<Command *> available_commands;
