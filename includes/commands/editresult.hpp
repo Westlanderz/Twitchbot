@@ -4,6 +4,8 @@
 #define editresult_h
 
 #include "../command.hpp"
+#include <string>
+#include <vector>
 
 class CommandHandler;
 

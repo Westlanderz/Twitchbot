@@ -102,7 +102,7 @@ std::string HelpCommand::generate_help_message(const std::string &) {
     return "I think you know how to use this command.....";
 }
 
-void HelpCommand::add_new_command(std::string command, std::string channel) {
+void HelpCommand::add_new_command(std::string command, std::string) {
     added_commands.push_back(command);
 }
 

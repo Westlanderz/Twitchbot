@@ -1,6 +1,8 @@
 #ifndef command_h
 #define command_h
 
+#include <string>
+
 class Command {
     public:
         Command() = default;

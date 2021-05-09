@@ -2,6 +2,8 @@
 #define edittimer_h
 
 #include "../command.hpp"
+#include <string>
+#include <vector>
 
 class CommandHandler;
 

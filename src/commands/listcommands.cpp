@@ -9,7 +9,7 @@ ListcommandsCommand::ListcommandsCommand(CommandHandler *_handler) : handler{_ha
     names.push_back("listcommand");
 }
 
-void ListcommandsCommand::execute(std::string sender, std::string original_msg, bool mod, bool sub, std::string channel) {
+void ListcommandsCommand::execute(std::string, std::string, bool, bool, std::string channel) {
     std::string file = handler->uses_bot()->is_command_file(channel);
     std::fstream commands;
     std::vector<std::string> command_list, output_list;
