@@ -27,7 +27,7 @@ This bot, when its run by me, has three versions: first we have a stable version
 | Version        | Build status        |
 | ------------- |:-------------:|
 | **Master**     | [![Status Stable](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/master?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/master) |
-| **Beta**     | [![Status Beta](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Beta-Releases?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Beta-Releases)      |
+| **Beta**     | [![Status Beta](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Beta-releases?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Beta-releases)      |
 | **Dev** | [![Status Dev](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Development?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Development)     |
 
 ## Getting started
