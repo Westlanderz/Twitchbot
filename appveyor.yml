@@ -3,29 +3,11 @@ version: 1.0.{build}
 branches:
   only:
   - master
-configuration: stable
-build_script:
-- sh: >-
-    mkdir build ; cd build
-    meson ..
-    ninja
-
-branches:
-  only:
   - Beta-releases
-configuration: beta
-build_script:
-- sh: >-
-    mkdir build ; cd build
-    meson ..
-    ninja
-
-branches:
-  only:
   - Development
-configuration: development
 build_script:
 - sh: >-
     mkdir build ; cd build
     meson ..
     ninja
+deploy: off
