@@ -1,5 +1,11 @@
 # Twitchbot
 
+![GitHub](https://img.shields.io/github/license/Westlanderz/Twitchbot)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/westlanderz/twitchbot)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/westlanderz/twitchbot?include_prereleases)
+![GitHub issues](https://img.shields.io/github/issues/westlanderz/twitchbot)
+![Discord](https://img.shields.io/discord/692815534865121370)
+
 ## Table of Contents
 
 1. [About The Project](#About)
@@ -28,7 +34,19 @@ This bot, when its run by me, has three versions: first we have a stable version
 | ------------- |:-------------:|
 | **Master**     | [![Status Stable](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/master?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/master) |
 | **Beta**     | [![Status Beta](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Beta-releases?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Beta-releases)      |
-| **Dev** | [![Status Dev](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Development?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Development)     |
+| **Alpha** | [![Status Dev](http://vps.noahknegt.com:8050/api/projects/status/g327ndh0mqvkugv5/branch/Development?svg=true)](http://vps.noahknegt.com:8050/project/AppVeyor/twitchbot/branch/Development)     |
+
+### Versioning
+
+This bot is versioned as ` major.minor.patch `. Next to that it is possible it has a suffix in the next formatting:
+
+| Stage  | Version       |
+| ------ |:-------------:|
+| **Alpha** | 1.1.0-a.1 |
+| **Beta** | 1.1.0-b.4 |
+| **Release candidate** | 1.1.0-rc.2 |
+| **Release** | 1.2.0 |
+| **Post-release fixes** | 1.2.4 |
 
 ## Getting started
 
