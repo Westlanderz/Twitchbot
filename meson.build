@@ -1,4 +1,4 @@
-project('Twitchbot', 'cpp', default_options : ['warning_level=3', 'werror=true'], version: '1.3.0-dev')
+project('Twitchbot', 'cpp', default_options : ['warning_level=3', 'werror=true'], version: '1.3.0-a.2')
 
 cpp_compiler = meson.get_compiler('cpp')
 add_project_arguments('--std=c++2a', '-c', '-fcoroutines', '-ggdb', language: 'cpp')
