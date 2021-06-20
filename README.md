@@ -129,6 +129,6 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 ## Contact
 
-Noah Knegt - [@SenpaiR6](https://twitter.com/SenpaiR6) - admin@noahknegt.com
+Noah Knegt - [SenpaiR6](https://twitter.com/SenpaiR6) - admin@noahknegt.com
 
 Project Link: [https://github.com/Westlanderz/Twitchbot](https://github.com/Westlanderz/Twitchbot)
